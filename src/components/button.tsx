@@ -22,7 +22,7 @@ const Button = ({
             className={`flex items-center h-[44px] w-full bg-[#FE5B3E] rounded-full gap-[10px] justify-center px-6`}
         >
             <span
-                className={` ${textStyle ?? ' text-white'} text-base font-normal tracking-[150%]`}
+                className={` ${textStyle ?? ' text-white'} text-base min-w-[77px] font-normal tracking-[150%]`}
             >
                 {children}
             </span>

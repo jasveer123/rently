@@ -1,5 +1,8 @@
 import Bike from '@/components/icons/bike'
 import Pick from '@/components/icons/pick'
+import Rent from '@/components/icons/rent'
+import Thumb from '@/components/icons/thumb'
+import Tick from '@/components/icons/tick'
 import React from 'react'
 
 export interface MenuLink {
@@ -52,5 +55,23 @@ export const cardData = [
     },
     {
         name: 'Honda Activa 125 BS6',
+    },
+]
+
+export const chooseUs = [
+    {
+        title: 'Complete services',
+        description: 'Lorem ipsum dolor sit amet,consectetur adipiscing elit.',
+        logo: <Tick />,
+    },
+    {
+        title: 'Good services',
+        description: 'Lorem ipsum dolor sit amet,consectetur adipiscing elit.',
+        logo: <Thumb />,
+    },
+    {
+        title: 'Easy rent',
+        description: 'Lorem ipsum dolor sit amet,consectetur adipiscing elit.',
+        logo: <Rent />,
     },
 ]

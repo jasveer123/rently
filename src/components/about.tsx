@@ -14,10 +14,10 @@ const About = () => {
             <div className=" flex gap-10 flex-col">
                 <div className=" flex w-full ">
                     <div className="flex w-full flex-col gap-2 py-4 justify-center items-start mt-12  container mx-auto">
-                        <span className=" text-[#e7e2e1]  text-[34px] font-normal capitalize tracking-wide">
+                        <span className=" text-[#FE5B3E]  text-[24px] font-normal capitalize tracking-wide">
                             ABOUT US
                         </span>
-                        <span className="font-bold  max-w-md text-[24px] text-[#082852]">
+                        <span className="font-bold  max-w-md text-[18px] text-[#082852]">
                             Friendly, fast process and good response
                         </span>
                         <span className="font-light w-full text-start max-w-2xl  text-base text-[#082852]">
