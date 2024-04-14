@@ -1,11 +1,19 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import SmallBike from './icons/small-bike'
 import Case from './icons/case'
 import Button from './button'
 import { cardData } from '@/constant/dummy-data'
+import BikeModel from './bike-model'
 
-export const Card = ({ name }: { name: string }) => {
+export const Card = ({
+    name,
+    onClickHandler,
+}: {
+    name: string
+    onClickHandler: () => void
+}) => {
     return (
         <div className=" flex p-[32px]  rounded-[18px] border border-[#E8E6E6]  justify-center items-center flex-col gap-4">
             <div className="flex flex-col gap-2 justify-center items-start">
@@ -34,14 +42,22 @@ export const Card = ({ name }: { name: string }) => {
                     </div>
                 </div>
             </div>
-            <Button>BOOK NOW</Button>
+            <Button onClick={onClickHandler}>BOOK NOW</Button>
         </div>
     )
 }
 
 const CardsContent = () => {
+    const [bikeInfo, setBikeInfo] = useState<boolean>(false)
+    const onClickHandler = () => {
+        setBikeInfo(true)
+    }
+    const onCloseHandler = () => {
+        setBikeInfo(false)
+    }
     return (
         <div className=" container mx-auto flex flex-col justify-center items-center">
+            {bikeInfo && <BikeModel onCloseHandler={onCloseHandler} />}
             <div className="flex flex-col gap-2 py-4 justify-center items-center  container mx-auto">
                 <span className=" text-[#FE5B3E]  text-[24px] font-normal capitalize tracking-wide">
                     BIKES
@@ -52,7 +68,11 @@ const CardsContent = () => {
             </div>
             <div className="justify-center gap-4 items-center grid grid-cols-3">
                 {cardData.map((item, index: number) => (
-                    <Card key={index} name={item.name} />
+                    <Card
+                        onClickHandler={onClickHandler}
+                        key={index}
+                        name={item.name}
+                    />
                 ))}
             </div>
         </div>

@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-international-phone-input {
+    width: 100%;
+}
+
+.custom-shape-divider-bottom-1713112361 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1713112361 svg {
+    position: relative;
+    display: block;
+    width: calc(162% + 1.3px);
+    height: 311px;
+}
+
+.custom-shape-divider-bottom-1713112361 .shape-fill {
+    fill: #082852;
+}

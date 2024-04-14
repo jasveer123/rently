@@ -25,7 +25,7 @@ module.exports = {
     },
     plugins: ['react', '@typescript-eslint', 'unicorn'],
     rules: {
-        "@typescript-eslint/no-explicit-any": "off",
+        '@typescript-eslint/no-explicit-any': 'off',
         'unicorn/no-useless-undefined': ['error', { checkArguments: false }],
     },
 }

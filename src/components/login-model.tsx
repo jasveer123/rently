@@ -1,79 +1,141 @@
-import React from 'react'
+'use client'
+import Button from '@/components/button'
+import Cross from '@/components/icons/cross'
+import React, { Dispatch } from 'react'
+import { PhoneInput } from 'react-international-phone'
+import 'react-international-phone/style.css'
+import { useEffect } from 'react'
 
-const LoginModel = ({
+const Page = ({
     onCloseHandler,
-    onClickHandler,
-    setPhoneNumber,
+    handletOtp,
+    handleSubmit,
+    handlePhoneChange,
+    handleAction,
+    setOtpValue,
+    currentAction,
+    dialOtp,
+    phone,
 }: {
+    handlePhoneChange: (phone: string) => void
+    handleAction: (action: string) => void
+    setOtpValue: Dispatch<React.SetStateAction<string | undefined>>
+    currentAction: string
+    dialOtp: boolean
+    handletOtp: () => Promise<void>
+    handleSubmit: () => Promise<void>
     onCloseHandler: () => void
-    onClickHandler: any
-    setPhoneNumber: any
+    phone: string
 }) => {
+    useEffect(() => {
+        document.body.style.overflow = 'hidden'
+        return () => {
+            document.body.style.overflow = 'unset'
+        }
+    }, [])
+    const Login = () => (
+        <>
+            <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full">
+                    <span className="mb-[10px]">
+                        {dialOtp ? 'Enter Otp' : 'Mobile Number'}{' '}
+                    </span>
+                    {dialOtp ? (
+                        <input
+                            className=" border-[1px] opacity-50 text-[12px] rounded-[10px]  outline-none  py-2 px-3 border-[#7C7C7C]"
+                            placeholder="Enter Yout OTP"
+                            onChange={(event) =>
+                                setOtpValue(event.target.value)
+                            }
+                        />
+                    ) : (
+                        <PhoneInput
+                            disableDialCodeAndPrefix
+                            defaultCountry="in"
+                            inputClassName="text-black"
+                            value={phone}
+                            onChange={handlePhoneChange}
+                            placeholder="Enter your phone number"
+                        />
+                    )}
+                </div>
+            </div>
+
+            <div className="flex mx-auto w-[231px] items-center">
+                <Button onClick={dialOtp ? handletOtp : handleSubmit}>
+                    Login
+                </Button>
+            </div>
+        </>
+    )
+
+    const SignUP = () => (
+        <>
+            <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full">
+                    <span className="mb-[10px]">Enter OTP</span>
+                    <input
+                        className=" border-[1px] opacity-50 text-[12px] rounded-[10px]  outline-none  py-2 px-3 border-[#7C7C7C]"
+                        placeholder="Enter Yout OTP"
+                    />
+                </div>
+            </div>
+
+            <div className="flex flex-col w-full mx-auto items-center">
+                <div className="flex justify-center items-center">
+                    <span className="text-[12px] mb-[19px]">
+                        Didnt Receive SMS Resend otp
+                    </span>
+                </div>
+                <div className="w-[231px] ">
+                    <Button>Confirm OTP</Button>
+                </div>
+            </div>
+        </>
+    )
+
     return (
-        <div
-            id="authentication-modal"
-            aria-hidden="true"
-            className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
-        >
-            <div className="relative p-4 w-full max-w-md max-h-full">
-                <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                            login
-                        </h3>
+        <div className="relative flex justify-center items-center">
+            <div
+                id="crypto-modal"
+                aria-hidden="true"
+                className=" fixed top-0 right-0 left-0 z-10 justify-center  bg-[#000000] opacity-40 items-center w-full h-full max-h-full"
+            ></div>
+            <div className="absolute z-[999] p-4 w-full mt-[50vh] max-w-[35rem] max-h-full">
+                <div className="relative bg-white w-full rounded-[30px]">
+                    <div className="flex items-center w-full justify-between pt-[5px] border-b rounded-t">
+                        <div className="flex w-full  items-center">
+                            <button
+                                className={`px-[100px] ${currentAction === 'LOGIN' && 'border-[#FE5B3E] text-[#FE5B3E]'} border-b-2  py-[15px]`}
+                                onClick={() => handleAction('LOGIN')}
+                            >
+                                LOGIN
+                            </button>
+                            <button
+                                className={`px-[100px] ${currentAction === 'SIGNUP' && 'border-[#FE5B3E] text-[#FE5B3E]'} border-b-2  py-[15px]`}
+                                onClick={() => handleAction('SIGNUP')}
+                            >
+                                SIGN UP
+                            </button>
+                        </div>
                         <button
                             onClick={onCloseHandler}
                             type="button"
-                            className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-hide="authentication-modal"
+                            className="text-gray-400 absolute -right-2 -top-2 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                            data-modal-hide="static-modal"
                         >
-                            <svg
-                                className="w-3 h-3"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 14 14"
-                            >
-                                <path
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                                />
-                            </svg>
-                            <span className="sr-only">Close modal</span>
+                            <Cross />
                         </button>
                     </div>
-                    <div className="p-4 md:p-5">
-                        <form className="space-y-4" action="#">
-                            <div>
-                                <label
-                                    htmlFor="email"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                >
-                                    phone number
-                                </label>
-                                <input
-                                    onChange={(event) =>
-                                        setPhoneNumber(event.target.value)
-                                    }
-                                    type="phone number"
-                                    name="phone number"
-                                    id="email"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="enter your phone number...."
-                                    required
-                                />
-                            </div>
-
-                            <button
-                                onClick={onClickHandler}
-                                className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Login
-                            </button>
-                        </form>
+                    <div className="flex flex-col gap-[50px] mt-[20px] px-[90px]">
+                        {currentAction === 'LOGIN' && Login()}
+                        {currentAction === 'SIGNUP' && SignUP()}
+                    </div>
+                    <div className="flex justify-center items-center">
+                        <span className="py-[19px] text-[12px]">
+                            By continuing you agree to the Privacy Policy of
+                            zoomride
+                        </span>
                     </div>
                 </div>
             </div>
@@ -81,4 +143,4 @@ const LoginModel = ({
     )
 }
 
-export default LoginModel
+export default Page

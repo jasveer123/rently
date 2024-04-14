@@ -13,7 +13,14 @@ export async function POST(resquest: Request) {
         }),
     })
     console.log(resp)
+
     const apiResponse = await resp.json()
+    console.log(apiResponse)
+
+    if (apiResponse.status === 'FAILURE') {
+        console.log('enter')
+        return NextResponse.json({ Error: 'Invalid OTP' })
+    }
     console.log(apiResponse)
     if (!resp.ok) {
         throw new Error('unable to make a request')

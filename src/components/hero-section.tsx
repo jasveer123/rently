@@ -16,7 +16,7 @@ const HeroSection = () => {
                 className="w-full h-full -z-50"
             />
             <div className="relative container mx-auto flex justify-center flex-col">
-                <div className=" bg-[#082852] z-50 mx-auto  gap-[74px]  px-[50px] py-[35px] mt-[-50px]  flex w-full  items-center justify-between rounded-[30px]">
+                <div className=" bg-[#082852]  mx-auto  gap-[74px]  px-[50px] py-[35px] mt-[-50px]  flex w-full  items-center justify-between rounded-[30px]">
                     <div className="py-[20px] px-[20px] w-full  bg-white rounded-[20px]">
                         Jaipur
                     </div>
